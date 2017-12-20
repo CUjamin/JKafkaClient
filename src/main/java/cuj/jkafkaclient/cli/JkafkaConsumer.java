@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
@@ -36,9 +35,16 @@ public class JkafkaConsumer extends Thread{
 
     private ConsumerConnector createConsumer() {
         Properties properties = new Properties();
-        properties.put("zookeeper.connect", "192.168.1.110:2181,192.168.1.111:2181,192.168.1.112:2181");//声明zk
+        properties.put("zookeeper.connect", "192.168.1.154:2181");//声明zk
+        properties.put("auto.offset.reset","smallest");
         properties.put("group.id", "group1");// 必须要使用别的组名称， 如果生产者和消费者都在同一组，则不能访问同一组内的topic数据
-        return Consumer.createJavaConsumerConnector(new ConsumerConfig(properties));
+        ConsumerConfig consumerConfig = new ConsumerConfig(properties);
+        System.out.println("consumerConfig.offsetsCommitMaxRetries():"+consumerConfig.offsetsCommitMaxRetries());
+        System.out.println("consumerConfig.offsetsChannelBackoffMs():"+consumerConfig.offsetsChannelBackoffMs());
+        System.out.println("consumerConfig.offsetsChannelSocketTimeoutMs():"+consumerConfig.offsetsChannelSocketTimeoutMs());
+        System.out.println("consumerConfig.autoOffsetReset():"+consumerConfig.autoOffsetReset());
+        System.out.println("consumerConfig.offsetsStorage():"+consumerConfig.offsetsStorage());
+        return Consumer.createJavaConsumerConnector(consumerConfig);
     }
 
 
