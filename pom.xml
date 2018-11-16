@@ -23,6 +23,11 @@
             <artifactId>kafka_2.10</artifactId>
             <version>0.8.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>cuj</groupId>
+            <artifactId>tools</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
 
     </dependencies>

@@ -39,7 +39,9 @@ public class JkafkaProducter extends Thread{
     private Producer createProducer() {
         Properties properties = new Properties();
         properties.put("zookeeper.connect", "192.168.1.154:2181");//声明zk
+
         properties.put("serializer.class", StringEncoder.class.getName());
+
         properties.put("metadata.broker.list", "192.168.1.154:9092");// 声明kafka broker
         return new Producer<Integer, String>(new ProducerConfig(properties));
     }
